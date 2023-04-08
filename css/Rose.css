@@ -1,0 +1,437 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Alegreya Sans", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: white;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+
+/*hamburger-menu*/
+
+:root {
+  --bar-width: 40px;
+  --bar-height: 4px;
+  --hamburger-gap: 6px;
+  --forground: #333;
+  --background: white;
+  --hamburger-margin: 38px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+}
+.menu {
+  display: none;
+}
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height) * 1.414213);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+  position: absolute;
+  top: var(--hamburger-margin);
+  right: var(--hamburger-margin);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.hamburger-menu::after,
+.hamburger-menu::before,
+.hamburger-menu input {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--forground);
+  border-radius: 99px;
+  transform-origin: right center;
+  transition: opacity var(--animation-timing), width var(--animation-timing),
+    rotate var(--animation-timing), translate var(--animation-timing);
+}
+
+.hamburger-menu input {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  pointer-events: none;
+}
+
+.hamburger-menu:has(input:checked)::before {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+
+.hamburger-menu:has(input:checked)::after {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar {
+  transition: translate var(--animation-timing);
+  translate: -200%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 0.5rem);
+  background-color: white;
+  color: var(--forground);
+  width: 100%;
+  height: 50%;
+}
+.sidebar ul {
+  width: 100%;
+  overflow: auto;
+  height: 75%;
+}
+
+.sidebar ul,
+li a {
+  list-style: none;
+  text-decoration: none;
+  color: #012b55;
+  font-family: "Marcellus", serif;
+  font-size: 2.2rem;
+  line-height: 7rem;
+  cursor: pointer;
+}
+.sidebar ul {
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 50px;
+}
+
+.sidebar li:first-child {
+  font-weight: 600;
+}
+
+.hamburger-menu:has(input:checked) + .sidebar {
+  translate: 0;
+  height: 100vh;
+  position: relative;
+}
+.nav-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  gap: 20px;
+  border-top: 1px solid lightgray;
+  padding: 20px 0 20px 0;
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(255, 255, 255);
+  height: 20%;
+}
+.logo-box-nav {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #e5e9ed;
+  color: #012b55;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.contact-logo-nav {
+  font-size: 2.6rem;
+  color: #012b55;
+}
+/* Logo */
+.logo {
+  display: flex;
+  margin-top: -40px;
+  padding-left: 18px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.logo p {
+  font-size: 2rem;
+  color: #012b55;
+}
+/* Style info */
+.info {
+  background-color: #f7f8f9;
+  padding: 50px 50px;
+  margin-top: 50px;
+}
+.info-text {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #012b55;
+}
+.scroll-text {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 25px 0px;
+  color: #012b55a2;
+  cursor: pointer;
+}
+/* Style Branding image */
+
+.branding-img {
+  outline: none;
+  width: 100%;
+}
+.branding-img-container img {
+  width: 100%;
+}
+.brand-image {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+}
+.brand-image img {
+  height: 100%;
+}
+.image-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-family: "Marcellus", serif;
+  gap: 14px;
+  font-size: 1.2rem;
+  font-style: italic;
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #012b55d6;
+}
+
+.image-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: normal;
+}
+.brand-image:hover .image-info {
+  opacity: 1;
+}
+/* Contact */
+.footer {
+  padding: 40px 20px;
+  width: 100%;
+}
+.contact-logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logo-box {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #e5e9ed;
+  color: #012b55;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.logo-box:hover {
+  background-color: #b5c0ca;
+  transition: 0.3;
+}
+.logo-box-nav:hover {
+  background-color: #b5c0ca;
+  transition: 0.3;
+}
+.contact-logo {
+  font-size: 1.5rem;
+  color: #012b55;
+}
+.text-bottom {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #012b55a2;
+  cursor: pointer;
+}
+.scroll {
+  display: none;
+}
+/*-------600 to 900 for tablet------*/
+
+@media screen and (min-width: 600px) {
+  .nav {
+    display: none;
+  }
+  .container {
+    display: flex;
+  }
+  .left-side {
+    width: 35%;
+    padding: 36px 24px 0 48px;
+  }
+  .right-side {
+    padding: 0 48px 0 0;
+    width: 65%;
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: 24px;
+  }
+  .logo {
+    margin: 0;
+    padding: 16px 20px 16px 0;
+    color: #1b2835de;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .info {
+    margin: 0;
+  }
+  .brand-image {
+    width: 50%;
+    height: 178px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+  }
+  .brand-image img {
+    width: 100%;
+    height: 100%;
+  }
+  .branding-img-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .image-info {
+    width: 99%;
+    height: 99%;
+  }
+  .image-text {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .sidebar-nav-icons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .sidebar-menu {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-menu-item {
+    margin: 8px 0;
+    font-size: 1.4rem;
+    color: #344557de;
+  }
+  .sidebar-menu-contact {
+    margin: 8px 0;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    color: #1b2835de;
+  }
+  .logo-box-menu {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #e5e9ed;
+    color: #012b55;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+  .logo-box-menu:hover {
+    background-color: #c1c6cc;
+  }
+  .contact-logo-menu {
+    font-size: 1.3rem;
+  }
+  .info-text {
+    font-size: 1.6rem;
+    padding: 24px;
+  }
+  .scroll-text {
+    font-size: 1.6rem;
+  }
+  .scroll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    background-color: #012b552c;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+  }
+  .scroll:hover {
+    background-color: #012b5556;
+  }
+  .scroll-icon {
+    font-size: 2rem;
+    color: #03213f;
+  }
+}
+/*-------900 to up for laptop------*/
+@media screen and (min-width: 600px) {
+  .left-side {
+    padding: 36px 0px 0 48px;
+    width: 30%;
+  }
+  .right-side {
+    width: 70%;
+  }
+  .info {
+    padding: 120px 40px;
+  }
+  .brand-image {
+    height: 280px;
+  }
+
+  .sidebar-menu-item {
+    font-size: 1.2rem;
+  }
+  .sidebar-menu-contact {
+    font-size: 1.4rem;
+  }
+}
